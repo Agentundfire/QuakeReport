@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/text_magnitud"
+        style="@style/TextItemList"
+        android:layout_weight="1"
+        tools:text="5.0" />
+
+    <TextView
+        android:id="@+id/text_location"
+        style="@style/TextItemList"
+        android:layout_weight="1.5"
+        tools:text="Rio de Janeiro" />
+
+    <TextView
+        android:id="@+id/text_date"
+        style="@style/TextItemList"
+        android:layout_weight="1.5"
+        tools:text="Feb 28, 2017" />
+
+</LinearLayout>
