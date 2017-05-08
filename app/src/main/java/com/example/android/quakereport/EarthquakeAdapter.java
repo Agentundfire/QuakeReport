@@ -1,6 +1,7 @@
 package com.example.android.quakereport;
 
 import android.app.Activity;
+import android.graphics.drawable.GradientDrawable;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +35,17 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         TextView textMagnitude = (TextView) listItemView.findViewById(R.id.magnitude);
         textMagnitude.setText(formatMagnitude(currentQuake.getMagnitude()));
 
+        // Set the proper background color on the magnitude circle.
+        // Fetch the background from the TextView, which is a GradientDrawable.
+        GradientDrawable magnitudeCircle = (GradientDrawable) textMagnitude.getBackground();
+
+        // Get the appropriate background color based on the current earthquake magnitude
+        int magnitudeColor = getMagnitudeColor(currentQuake.getMagnitude());
+
+        // Set the color on the magnitude circle
+        magnitudeCircle.setColor(magnitudeColor);
+
+
         String originalLocation = currentQuake.getLocation();
         String primaryLocation, locationOffset;
 
@@ -61,8 +73,8 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
 
         return listItemView;
     }
-/*
-   private int getMagnitudeColor(double magnitude) {
+
+    private int getMagnitudeColor(double magnitude) {
         int magnitudeColorResourceId;
         int magnitudeFloor = (int) Math.floor(magnitude);
         switch (magnitudeFloor) {
@@ -101,7 +113,6 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
 
         return ContextCompat.getColor(getContext(), magnitudeColorResourceId);
     }
-*/
 
     private String formatMagnitude(double magnitude) {
         DecimalFormat magnitudeFormat = new DecimalFormat("0.0");
