@@ -5,11 +5,12 @@ import java.util.Date;
 
 public class Earthquake {
 
-    private String mMagnitud, mLocation, mDate, mTime;
+    private double mMagnitude;
+    private String mLocation, mDate, mTime;
     private Date dateObject;
 
-    public Earthquake(String mMagnitud, String mLocation, long UnixDate) {
-        this.mMagnitud = mMagnitud;
+    public Earthquake(double mMagnitude, String mLocation, long UnixDate) {
+        this.mMagnitude = mMagnitude;
         this.mLocation = mLocation;
         this.dateObject = new Date(UnixDate);
 
@@ -17,8 +18,8 @@ public class Earthquake {
         mTime = new SimpleDateFormat("h:mm a").format(dateObject);
     }
 
-    public String getMagnitud() {
-        return mMagnitud;
+    public double getMagnitude() {
+        return mMagnitude;
     }
 
     public String getLocation() {

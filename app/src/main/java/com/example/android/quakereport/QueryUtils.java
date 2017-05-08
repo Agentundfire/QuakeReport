@@ -45,18 +45,19 @@ public final class QueryUtils {
             JSONArray features = root.getJSONArray("features");
 
             JSONObject quakeProperties;
-            String quakeMagnitud, quakeLocation;
+            double quakeMagnitude;
+            String quakeLocation;
             long quakeTime;
 
             for (int i = 0; i < features.length(); i++) {
                 JSONObject quake = features.getJSONObject(i);
                 quakeProperties = quake.getJSONObject("properties");
 
-                quakeMagnitud = quakeProperties.getString("mag");
+                quakeMagnitude = quakeProperties.getDouble("mag");
                 quakeLocation = quakeProperties.getString("place");
                 quakeTime = quakeProperties.getLong("time");
 
-                earthquakes.add(new Earthquake(quakeMagnitud, quakeLocation, quakeTime));
+                earthquakes.add(new Earthquake(quakeMagnitude, quakeLocation, quakeTime));
             }
         } catch (JSONException e) {
             Log.e("QueryUtils", "Problem parsing the earthquake JSON results", e);
