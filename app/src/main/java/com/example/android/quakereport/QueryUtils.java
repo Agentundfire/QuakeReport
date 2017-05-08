@@ -45,7 +45,8 @@ public final class QueryUtils {
             JSONArray features = root.getJSONArray("features");
 
             JSONObject quakeProperties;
-            String quakeMagnitud, quakeLocation, quakeTime;
+            String quakeMagnitud, quakeLocation;
+            long quakeTime;
 
             for (int i = 0; i < features.length(); i++) {
                 JSONObject quake = features.getJSONObject(i);
@@ -53,7 +54,7 @@ public final class QueryUtils {
 
                 quakeMagnitud = quakeProperties.getString("mag");
                 quakeLocation = quakeProperties.getString("place");
-                quakeTime = quakeProperties.getString("time");
+                quakeTime = quakeProperties.getLong("time");
 
                 earthquakes.add(new Earthquake(quakeMagnitud, quakeLocation, quakeTime));
             }
