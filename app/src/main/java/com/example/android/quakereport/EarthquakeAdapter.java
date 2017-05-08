@@ -28,7 +28,7 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         Earthquake currentQuake = getItem(position);
 
         TextView textMagnitud = (TextView) listItemView.findViewById(R.id.text_magnitud);
-        textMagnitud.setText(currentQuake.getMagnitud() + "");
+        textMagnitud.setText(currentQuake.getMagnitud());
 
         TextView textLocation = (TextView) listItemView.findViewById(R.id.text_location);
         textLocation.setText(currentQuake.getLocation());
