@@ -46,7 +46,7 @@ public final class QueryUtils {
 
             JSONObject quakeProperties;
             double quakeMagnitude;
-            String quakeLocation;
+            String quakeLocation, quakeURL;
             long quakeTime;
 
             for (int i = 0; i < features.length(); i++) {
@@ -56,8 +56,9 @@ public final class QueryUtils {
                 quakeMagnitude = quakeProperties.getDouble("mag");
                 quakeLocation = quakeProperties.getString("place");
                 quakeTime = quakeProperties.getLong("time");
+                quakeURL = quakeProperties.getString("url");
 
-                earthquakes.add(new Earthquake(quakeMagnitude, quakeLocation, quakeTime));
+                earthquakes.add(new Earthquake(quakeMagnitude, quakeLocation, quakeTime, quakeURL));
             }
         } catch (JSONException e) {
             Log.e("QueryUtils", "Problem parsing the earthquake JSON results", e);
