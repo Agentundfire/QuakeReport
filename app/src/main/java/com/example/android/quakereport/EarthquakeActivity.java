@@ -25,20 +25,25 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 public class EarthquakeActivity extends AppCompatActivity {
 
-    public static final String LOG_TAG = EarthquakeActivity.class.getName();
+    //private static final String USGS_REQUEST_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&eventtype=earthquake&orderby=time&minmag=6&limit=10";
+    private static final String USGS_REQUEST_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&eventtype=earthquake&orderby=time&limit=15";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.earthquake_activity);
 
-        // Create a fake list of earthquake locations.
-        ArrayList<Earthquake> earthquakes = QueryUtils.extractEarthquakes();
+        EarthQuakeAsyncTask task = new EarthQuakeAsyncTask();
+        task.execute(USGS_REQUEST_URL);
+    }
 
+    private void updateUI(ArrayList<Earthquake> earthquakes) {
         // Find a reference to the {@link ListView} in the layout
         ListView earthquakeListView = (ListView) findViewById(R.id.list);
 
@@ -68,4 +73,30 @@ public class EarthquakeActivity extends AppCompatActivity {
             }
         });
     }
+
+    private class EarthQuakeAsyncTask extends AsyncTask<String, Void, ArrayList<Earthquake>> {
+        @Override
+        protected ArrayList<Earthquake> doInBackground(String... urls) {
+            // Don't perform the request if there are no URLs, or the first URL is null.
+            if (urls.length < 1 || urls[0] == null) {
+                return null;
+            }
+
+            // Perform the HTTP request for earthquake data and process the response.
+            ArrayList<Earthquake> earthquakes = QueryUtils.fetchEarthquakesList(urls[0]);
+            return earthquakes;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<Earthquake> earthquakes) {
+            // If there is no result, do nothing.
+            if (earthquakes == null) {
+                return;
+            }
+
+            // Update the information displayed to the user.
+            updateUI(earthquakes);
+        }
+    }
+
 }
