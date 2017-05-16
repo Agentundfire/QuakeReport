@@ -10,9 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+
 
 
 public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
